@@ -26,8 +26,8 @@ if sys.platform == "win32":
 
 MAC_IP = "192.168.1.222"
 OLLAMA_URL = f"http://{MAC_IP}:11434/api/generate"
-# 使用极速版模型 (71 tokens/秒，响应只需 3~4 秒)
-MODEL_NAME = "gemma4:e4b-mlx"
+# 选用 Mac 上的 26B 旗舰高智商模型 (15.53 GB)
+MODEL_NAME = "gemma4:26b-mlx"
 
 
 # ==============================================================================
@@ -99,7 +99,7 @@ def query_local_llm(user_instruction: str) -> Dict[str, Any]:
     
     if thinking_text:
         print(f"🧠 [模型思维链推导 (Thinking)]:\n{thinking_text[:200]}...\n")
-    print(f"• 本地大模型推理完成！(耗时: {elapsed:.2f} 秒)")
+    print(f"• 本地大模型推理完成！(耗时: {elapsed:.2f} 秒, 生成 Token: {data.get('eval_count')}, 终止原因: {data.get('done_reason')})")
     print(f"• 模型最终交付:\n{raw_response}\n")
 
     # 如果 response 为空但 thinking 包含结果，或者从 response 中提取 JSON
