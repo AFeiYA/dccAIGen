@@ -14,3 +14,9 @@ wheels/
 # IDEs
 .vscode/
 .idea/
+.obsidian/
+
+# Local Vector Database & Scratch Tests
+chroma_data/
+test_*.py
+

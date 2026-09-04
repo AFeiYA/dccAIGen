@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Module 14: 大语言模型核心底层原理 (Core Foundations of GenAI)"
 tags:
   - GenerativeAI
