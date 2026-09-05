@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Module 12: Asyncio, Event Loop, and Modern Concurrency in Python"
 tags:
   - Python

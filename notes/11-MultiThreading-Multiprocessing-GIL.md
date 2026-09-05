@@ -1,4 +1,4 @@
-﻿---
+---
 title: "Module 11: MultiThreading, Multiprocessing, and GIL in Python"
 tags:
   - Python
