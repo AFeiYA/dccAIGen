@@ -10,6 +10,7 @@ wheels/
 .venv
 .env
 .env.*
+!.env.example
 
 # IDEs
 .vscode/
@@ -18,5 +19,6 @@ wheels/
 
 # Local Vector Database & Scratch Tests
 chroma_data/
-test_*.py
+/test_*.py
+!tests/
 

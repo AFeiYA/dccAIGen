@@ -113,12 +113,27 @@ async def run_pipeline_job(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="DCC Pipeline Agent - Enterprise AI Copilot")
+    parser = argparse.ArgumentParser(description="DCC Pipeline Agent - Enterprise AI Copilot & Microservice")
     parser.add_argument("--prompt", "-p", type=str, help="Natural language pipeline task prompt")
     parser.add_argument("--auto-approve", "-y", action="store_true", help="Auto-approve high-risk gates")
     parser.add_argument("--thread-id", "-t", type=str, help="Custom job thread id for session persistence")
+    parser.add_argument("--server", "-s", action="store_true", help="Start FastAPI REST & SSE microservice")
+    parser.add_argument("--host", type=str, default=None, help="Server host binding override")
+    parser.add_argument("--port", type=int, default=None, help="Server port override")
 
     args = parser.parse_args()
+
+    if args.server:
+        import uvicorn
+        host = args.host or settings.api_host
+        port = args.port or settings.api_port
+        print("\n" + "=" * 75)
+        print(f"🚀 [DCC Pipeline Agent] 启动 FastAPI 微服务网关: http://{host}:{port}")
+        print(f"📖 OpenAPI 交互文档 (Swagger UI): http://{host}:{port}/docs")
+        print(f"🩺 节点探活状态端点: http://{host}:{port}/api/v1/health")
+        print("=" * 75 + "\n")
+        uvicorn.run("dcc_agent.api.app:app", host=host, port=port, reload=False, log_level="info")
+        return
 
     prompt = args.prompt
     if not prompt:

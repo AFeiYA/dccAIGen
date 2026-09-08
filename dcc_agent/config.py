@@ -73,6 +73,20 @@ class PipelineSettings(BaseModel):
         description="Keywords that automatically trigger human-in-the-loop approval gate.",
     )
 
+    # FastAPI Microservice Gateway Settings
+    api_host: str = Field(
+        default_factory=lambda: os.getenv("API_HOST", "127.0.0.1"),
+        description="Host interface for DCC FastAPI service binding.",
+    )
+    api_port: int = Field(
+        default_factory=lambda: int(os.getenv("API_PORT", "8080")),
+        description="Port for DCC FastAPI service.",
+    )
+    cors_origins: List[str] = Field(
+        default=["*"],
+        description="Allowed CORS origins for Web UI and DCC Slate WebBrowser widgets.",
+    )
+
 
 # Export singleton instance
 settings = PipelineSettings()
