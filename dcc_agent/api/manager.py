@@ -246,6 +246,13 @@ class PipelineJobManager:
             "max_retries": settings.max_retries,
             "reflection_notes": "",
             "audit_trail": [],
+            "pipeline_mode": "multi_agent",
+            "active_subagent": "supervisor",
+            "wbs_plan": [],
+            "current_wbs_index": 0,
+            "subagent_results": {},
+            "blueprint_dsl": "",
+            "spawned_actors": [],
         }
 
         try:

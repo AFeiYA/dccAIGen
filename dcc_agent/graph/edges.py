@@ -10,17 +10,21 @@ from typing import Literal
 from dcc_agent.graph.state import AgentPipelineState
 
 
-def route_risk_check(state: AgentPipelineState) -> Literal["gate", "planner"]:
+def route_risk_check(state: AgentPipelineState) -> Literal["gate", "supervisor", "planner"]:
     """Routes to human approval gate if high risk and not yet approved."""
-    if state["is_high_risk"] and not state["human_approved"]:
+    if state.get("is_high_risk") and not state.get("human_approved"):
         return "gate"
-    return "planner"
-
-
-def route_gate_approval(state: AgentPipelineState) -> Literal["planner", "abort"]:
-    """Routes to action planner if approved, or aborts if rejected."""
-    if state["human_approved"]:
+    if state.get("pipeline_mode") == "single":
         return "planner"
+    return "supervisor"
+
+
+def route_gate_approval(state: AgentPipelineState) -> Literal["supervisor", "planner", "abort"]:
+    """Routes to supervisor or action planner if approved, or aborts if rejected."""
+    if state.get("human_approved"):
+        if state.get("pipeline_mode") == "single":
+            return "planner"
+        return "supervisor"
     return "abort"
 
 

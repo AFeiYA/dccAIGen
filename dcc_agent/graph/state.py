@@ -43,3 +43,12 @@ class AgentPipelineState(TypedDict):
 
     # 6. Immutable Audit Trail (Append-Only)
     audit_trail: Annotated[List[str], operator.add]
+
+    # 7. Multi-Agent Coordination & WBS
+    pipeline_mode: str
+    active_subagent: str
+    wbs_plan: List[Dict[str, Any]]
+    current_wbs_index: int
+    subagent_results: Dict[str, Any]
+    blueprint_dsl: str
+    spawned_actors: List[str]
